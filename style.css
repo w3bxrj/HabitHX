@@ -1,0 +1,354 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+    min-height: 100vh;
+    background-image: linear-gradient(120deg, #8ca712 0%, #45eb0c 100%);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #aee4ae;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 2.2rem;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #4CAF50;
+}
+
+h1 i {
+    color: #4CAF50;
+    margin-right: 10px;
+}
+
+.date {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.input {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+#habitName {
+    flex: 1;
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Segoe UI', sans-serif;
+    transition: border 0.3s;
+    background-color: #bec3e0;
+}
+
+#habitName:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+#addBtn {
+    padding: 14px 28px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+
+#addBtn:hover {
+    background-color: #45a049;
+}
+
+#addBtn i {
+    margin-right: 8px;
+}
+
+.progressBar {
+    background-color: white;
+    padding: 18px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+    border: 2px dashed #dee2e6;
+    background-color: #bec3e0;
+}
+
+#progressInfo {
+    color: #333;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+#progressInfo i {
+    color: #4CAF50;
+    margin-right: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: white;
+    border: 1px solid #e9ecef;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    background-color: #bec3e0;
+}
+
+li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-color: #4CAF50;
+}
+
+.habit-name {
+    flex: 1;
+}
+
+.habit-name strong {
+    display: block;
+    font-size: 1.3rem;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.habit-name small {
+    display: block;
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+.over {
+    text-decoration: line-through;
+    color: #95a5a6 !important;
+}
+
+.streak-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #333;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-left: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.actions button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.actions button i {
+    margin-right: 6px;
+}
+
+.actions button:first-child {
+    background-color: #28a745;
+    color: white;
+}
+
+.actions button:first-child:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.actions button:first-child:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.actions button:last-child {
+    background-color: #dc3545;
+    color: white;
+}
+
+.actions button:last-child:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+.completed-badge {
+    display: inline-block;
+    background: #28a745;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+/* Khali pan ki tanhayi 🤧*/
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c757d;
+    font-style: italic;
+    border: 2px dashed #dee2e6;
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: #f8f9fa;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: #dee2e6;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.empty-state p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+/* Media query dalna hai abhi toh */
+
+/* Abhi mobile ke liye bana raha hu */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .input {
+        flex-direction: column;
+    }
+    
+    #addBtn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .habit-name {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    
+    .streak-badge {
+        margin-top: 5px;
+        margin-left: 0;
+        display: inline-block;
+    }
+}
+
+/* media query sirf phone k liye rakhunga */
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    .actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .actions button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@keyframes flow {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+li {
+    animation: flow 0.3s ease-out;
+}
+
+/* Thankyou bhai sikhane k liye 🫂 , ye nhi pta tha*/
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Kuch aur improvements baad me karunga jarurat padi toh */
