@@ -90,12 +90,13 @@ The demo video demonstrates:
 
 ## 👤 Author
 
-**Student Name:** *Ridham Prajapati*
-**Course:** Web Dev II
-**Project Type:** DOM-Based Frontend Web Application
+Student Name: Ridham Prajapati
+Course: Web Dev II
+Project Type: End Term Project
 
 ---
 
 ## ✅ Final Note
 
 HabitHX is a fully functional DOM-based web application that demonstrates core JavaScript concepts such as DOM manipulation, event-driven programming, and client-side state management.
+
