@@ -4,6 +4,16 @@
 
 let habits = [];
 
+
+// theme ka toggle :
+
+let isDarkMode = false;
+
+// undo
+
+let lastDeleted = null;
+let undoTimeout = null; // Timeout track karne ke liye
+
 // Date feature
 
 function getDate() {
@@ -25,9 +35,169 @@ const habitList = document.querySelector("#habitList");
 const progressInfo = document.querySelector("#progressInfo");
 const currentDate = document.querySelector("#currentDate");
 const emptyState = document.querySelector("#emptyState");
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+const themeIcon = themeToggle.querySelector('i');
+
+// render dark mode
+
+function loadThemePreference() {
+
+    const savedTheme = localStorage.getItem('habithx-theme');
+
+    // Agar pehle se dark mode set hai
+
+    if (savedTheme === 'dark')
+        enableDarkMode();
+    else 
+        enableLightMode();
+    
+}
+
+function enableDarkMode() {
+
+    body.setAttribute('data-theme', 'dark');
+    isDarkMode = true;
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+    localStorage.setItem('habithx-theme', 'dark');
+
+    themeToggle.style.backgroundColor = '#333';
+    themeToggle.style.color = '#FFD700';
+
+}
+
+
+function enableLightMode() {
+
+    body.removeAttribute('data-theme');
+    isDarkMode = false;
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+    localStorage.setItem('habithx-theme', 'light');
+
+    // Button color reset
+
+    themeToggle.style.backgroundColor = '';
+    themeToggle.style.color = '';
+
+}
+
+
+function toggleTheme() {
+    if (isDarkMode) {
+        enableLightMode();
+    } else {
+        enableDarkMode();
+    }
+
+    themeToggle.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        themeToggle.style.transform = 'scale(1)';
+    }, 150);
+
+}
 
 let today = new Date();
 currentDate.innerText = today.toDateString();
+
+// undo func
+
+function undoDelete() {
+
+    if (!lastDeleted) return;
+
+    habits.splice(lastDeleted.index, 0, lastDeleted.habit);
+
+    saveData();
+    loadHabits();
+
+    lastDeleted = null;
+    hideUndoBtn();
+}
+function showUndoBtn(habitName) {
+
+    // Pehle agar undo button hai toh remove karo
+    hideUndoBtn();
+
+    if (undoTimeout) {
+        clearTimeout(undoTimeout);
+    }
+
+    const undoBtn = document.createElement('button');
+    undoBtn.id = 'undoDeleteBtn';
+    undoBtn.innerHTML = '<i class="fas fa-undo"></i> Undo Delete';
+    undoBtn.onclick = undoDelete;
+
+    document.querySelector('.input-section').appendChild(undoBtn);
+
+    undoBtn.style.cssText = `
+        margin-top: 10px;
+        padding: 10px 15px;
+        background: #ff6b6b;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-weight: bold;
+        transition: opacity 0.3s ease;
+    `;
+
+    alert("🗑️ Deleted: " + habitName + " - Undo under 5 seconds");
+
+    // 5 seconds baad button auto-hide ho jayega
+
+    undoTimeout = setTimeout(() => {
+        undoBtn.style.opacity = '0';
+        setTimeout(() => {
+            hideUndoBtn();
+            lastDeleted = null;
+        }, 300);
+    }, 5000);
+}
+
+function hideUndoBtn() {
+    const existingBtn = document.getElementById('undoDeleteBtn');
+    if (existingBtn) {
+        existingBtn.remove();
+    }
+
+    if (undoTimeout) {
+        clearTimeout(undoTimeout);
+        undoTimeout = null;
+    }
+}
+
+// theme event
+
+themeToggle.addEventListener('click', toggleTheme);
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    loadThemePreference();
+
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (!localStorage.getItem('habithx-theme') && prefersDark)
+        enableDarkMode();
+
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.getItem('habithx-theme')) {
+            if (e.matches)
+                enableDarkMode();
+            else
+                enableLightMode();
+
+        }
+    });
+
+});
+
+
+
 
 // Adding Habit
 
@@ -36,6 +206,14 @@ addBtn.addEventListener('click', function () {
 
     if (habit === "") {
         alert("Please enter a habit name");
+        habitName.focus();
+        return;
+    }
+
+    const habitExists = habits.some(h => h.name.toLowerCase() === habit.toLowerCase());
+
+    if (habitExists) {
+        alert("This habit already exists!");
         habitName.focus();
         return;
     }
@@ -52,6 +230,8 @@ addBtn.addEventListener('click', function () {
 
     saveData();
     loadHabits();
+
+    hideUndoBtn();
 });
 
 // keyboard event se enter se task add krna hai
@@ -60,6 +240,7 @@ addBtn.addEventListener('click', function () {
 
 habitName.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
+        hideUndoBtn();
         addBtn.click();
     }
 });
@@ -87,21 +268,21 @@ function loadHabits() {
         let habitAdded = "";
         let completedInfo = "";
 
-        if (habits[i].habitAdded) 
+        if (habits[i].habitAdded)
             habitAdded = `Started : ${habits[i].habitAdded}`;
-        
 
-        if (habits[i].completedDate) 
+
+        if (habits[i].completedDate)
             completedInfo = `Last completed : ${habits[i].completedDate}`;
-        else 
+        else
             completedInfo = `Not completed yet`;
-        
+
 
         let streakBadge = "";
-        if (habits[i].streak > 0) 
+        if (habits[i].streak > 0)
 
-            streakBadge = `<span class="streak-badge">🔥 ${habits[i].streak} day streak</span>`;
-        
+            streakBadge = `<span class="streak-badge">${habits[i].streak} day streak 🔥</span>`;
+
 
         span.innerHTML = `
             <strong>${habits[i].name}</strong> ${streakBadge}<br>
@@ -150,9 +331,9 @@ function loadHabits() {
                     habits[i].streak++;
                 else if (gap > 1)
                     habits[i].streak = 1;
-            } else 
+            } else
                 habits[i].streak = 1;
-            
+
 
             habits[i].completedDate = today;
             saveData();
@@ -165,9 +346,19 @@ function loadHabits() {
 
         deleteBtn.addEventListener('click', function () {
             if (confirm("Are you sure you want to delete this habit?")) {
+
+                lastDeleted = {
+                    habit: JSON.parse(JSON.stringify(habits[i])),
+                    index: i
+                };
+
+                let habitName = habits[i].name;
+
                 habits.splice(i, 1);
                 saveData();
                 loadHabits();
+
+                showUndoBtn(habitName);
             }
         });
 
@@ -186,9 +377,9 @@ function loadHabits() {
 // Progress Info
 
 function updateProgress(finishCount) {
-    if (habits.length == 0) 
+    if (habits.length == 0)
         progressInfo.innerHTML = '<i class="fas fa-chart-pie"></i> No habits added yet';
-     else {
+    else {
 
         let progressPercent = Math.round((finishCount / habits.length) * 100);
         progressInfo.innerHTML = `
