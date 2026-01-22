@@ -1,48 +1,48 @@
-# HabitHX – Habit Tracker Web App
+# HabitHX – Habit Tracker Web Application
 
 ## 📌 Project Overview
 
-HabitHX ek simple aur practical habit tracker web application hai jo users ko apni daily habits track karne, streak maintain karne aur progress dekhne me help karta hai. Ye project pure **Vanilla JavaScript, HTML aur CSS** ka use karke banaya gaya hai, bina kisi framework ke.
+HabitHX is a simple and practical habit tracker web application that helps users build and maintain daily habits. The project is developed using **Vanilla JavaScript, HTML, and CSS** without using any frontend frameworks.
 
-Is app ka main focus real-world problem solve karna hai – log daily habits start to kar lete hain, lekin unhe consistently follow karna mushkil hota hai. HabitHX is problem ko simple UI aur clear feedback ke through address karta hai.
+The main idea behind HabitHX is to solve a real-life problem. Many people start good habits but fail to track them consistently. HabitHX provides a clean interface, daily progress tracking, and streak management to encourage consistency.
 
 ---
 
 ## ❓ Problem Statement
 
-Daily habits ko manually track karna confusing aur inconsistent ho jata hai. Users ko:
+Tracking daily habits manually can be confusing and unreliable. Users often face issues such as:
 
-* Yaad nahi rehta ki habit aaj complete hui ya nahi
-* Streak tootne ka exact reason samajh nahi aata
-* Progress ka clear idea nahi milta
+* Forgetting whether a habit was completed on a particular day
+* Losing streaks without understanding why
+* Not having a clear view of daily progress
 
-HabitHX in sab problems ka solution deta hai ek clean, interactive aur browser-based habit tracking system ke through.
+HabitHX addresses these problems by providing a browser-based habit tracking system with clear visual feedback and persistent data storage.
 
 ---
 
 ## ✨ Features Implemented
 
 * ➕ Add new habits dynamically
-* ❌ Delete habits with **Undo option (5 seconds)**
-* ✅ Mark habit as completed for today
-* 🔥 Automatic streak calculation (day-to-day)
-* 📊 Daily progress indicator (completed vs total habits)
-* 🌙 Dark Mode / Light Mode toggle (saved in LocalStorage)
-* 💾 Data persistence using LocalStorage
-* ⌨️ Keyboard support (Enter key to add habit)
-* 📱 Responsive UI for mobile and desktop
+* ❌ Delete habits with an **Undo option (available for 5 seconds)**
+* ✅ Mark habits as completed for the current day
+* 🔥 Automatic streak calculation based on daily consistency
+* 📊 Daily progress indicator showing completed vs total habits
+* 🌙 Dark Mode and Light Mode toggle (saved using LocalStorage)
+* 💾 Persistent data storage using LocalStorage
+* ⌨️ Keyboard support (Enter key to add habits)
+* 📱 Responsive design for mobile and desktop devices
 
 ---
 
 ## 🧠 DOM & JavaScript Concepts Used
 
-* `document.createElement()` for dynamic UI
+* Dynamic element creation using `document.createElement()`
 * DOM manipulation (`appendChild`, `innerHTML`, `classList`)
 * Event handling (`click`, `keypress`, `DOMContentLoaded`)
 * Conditional rendering (empty state, completed state)
-* JavaScript arrays & objects for state management
-* LocalStorage for data persistence
-* Date handling using JavaScript `Date` object
+* JavaScript arrays and objects for state management
+* LocalStorage for saving and retrieving data
+* Date handling using the JavaScript `Date` object
 
 ---
 
@@ -53,49 +53,49 @@ HabitHX in sab problems ka solution deta hai ek clean, interactive aur browser-b
 * Vanilla JavaScript (ES6+)
 * Browser APIs (LocalStorage)
 
-No frameworks or libraries like React, jQuery, etc. are used.
+No external frameworks or libraries such as React, Angular, Vue, or jQuery were used.
 
 ---
 
 ## ▶️ How to Run the Project
 
 1. Download or clone the repository
-2. Open the folder
-3. Double-click `index.html`
-4. Project will run directly in the browser
+2. Open the project folder
+3. Open `index.html` in any modern web browser
+4. The application will run directly in the browser
 
-(No server or installation required)
+(No server setup or installation is required)
 
 ---
 
 ## ⚠️ Known Limitations
 
-* Habits are stored locally (device-specific)
-* No user authentication
-* No cloud sync
-* Progress is calculated per day only
+* Data is stored locally in the browser (device-specific)
+* No user authentication system
+* No cloud or database integration
+* Progress is calculated on a per-day basis only
 
 ---
 
 ## 🎥 Demo Video
 
-Demo video shows:
+The demo video demonstrates:
 
-* Adding habits
-* Completing habits
-* Streak logic
-* Delete + undo feature
-* Dark mode toggle
+* Adding new habits
+* Completing habits for the day
+* Streak calculation logic
+* Delete and undo delete functionality
+* Dark mode and light mode switching
 * Live DOM updates
 
 ## 👤 Author
 
-**Student Name:** Ridham Prajapati
+**Student Name:** *Ridham Prajapati*
 **Course:** Web Dev II
-**Project Type:** End Term Project
+**Project Type:** DOM-Based Frontend Web Application
 
 ---
 
 ## ✅ Final Note
 
-HabitHX ek simple but complete DOM-based web application hai jo core JavaScript concepts, event handling aur state management ko practically demonstrate karta hai.
+HabitHX is a fully functional DOM-based web application that demonstrates core JavaScript concepts such as DOM manipulation, event-driven programming, and client-side state management.
