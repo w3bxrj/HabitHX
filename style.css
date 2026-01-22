@@ -1,31 +1,109 @@
+/* var for theme  */
+
+:root {
+    /* Default */
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --bg-container: #aee4ae;
+    --bg-input: #bec3e0;
+    --bg-progress: #bec3e0;
+    --bg-habit: #bec3e0;
+    --bg-filters: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+    --bg-button: #4CAF50;
+    --bg-button-hover: #45a049;
+
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-muted: #6c757d;
+    --text-light: #ffffff;
+
+    --border-color: #e0e0e0;
+    --border-light: #dee2e6;
+    --border-input: #ddd;
+    --border-focus: #4CAF50;
+
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    --gradient-bg: linear-gradient(120deg, #73890d 0%, #41a91d 100%);
+
+    --scrollbar-track: #f1f1f1;
+    --scrollbar-thumb: #c1c1c1;
+    --scrollbar-hover: #a8a8a8;
+}
+
+/* Dark  */
+
+[data-theme="dark"] {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --bg-container: #2d2d2d;
+    --bg-input: #3d3d3d;
+    --bg-progress: #3d3d3d;
+    --bg-habit: #3d3d3d;
+    --bg-filters: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+    --bg-button: #4CAF50;
+    --bg-button-hover: #45a049;
+
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-muted: #888888;
+    --text-light: #ffffff;
+
+    --border-color: #444444;
+    --border-light: #555555;
+    --border-input: #555555;
+    --border-focus: #4CAF50;
+
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.4);
+
+    --gradient-bg: linear-gradient(120deg, #1a3a1a 0%, #2a5a2a 100%);
+
+    --scrollbar-track: #2a2a2a;
+    --scrollbar-thumb: #555555;
+    --scrollbar-hover: #666666;
+}
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: var(--bg-primary);
     padding: 20px;
     min-height: 100vh;
-    background-image: linear-gradient(120deg, #8ca712 0%, #45eb0c 100%);
+    background-image: var(--gradient-bg);
+    color: var(--text-primary);
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
-    background-color: #aee4ae;
+    background-color: var(--bg-container);
     border-radius: 10px;
     padding: 25px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    border: 1px solid #e0e0e0;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 15px;
+    color: var(--text-primary);
+    margin-bottom: 0;
     font-size: 2.2rem;
     padding-bottom: 10px;
     border-bottom: 2px solid #4CAF50;
@@ -36,9 +114,40 @@ h1 i {
     margin-right: 10px;
 }
 
+.theme-switcher {
+    display: flex;
+    align-items: center;
+}
+
+.theme-btn {
+    padding: 10px 20px;
+    background-color: var(--bg-button);
+    color: var(--text-light);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.theme-btn:hover {
+    background-color: var(--bg-button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.theme-btn i {
+    font-size: 1rem;
+}
+
 .date {
     text-align: center;
-    color: #666;
+    color: var(--text-secondary);
     margin-bottom: 25px;
     font-size: 1.1rem;
     font-weight: 500;
@@ -53,24 +162,29 @@ h1 i {
 #habitName {
     flex: 1;
     padding: 14px;
-    border: 2px solid #ddd;
+    border: 2px solid var(--border-input);
     border-radius: 8px;
     font-size: 16px;
     font-family: 'Segoe UI', sans-serif;
     transition: border 0.3s;
-    background-color: #bec3e0;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+}
+
+#habitName::placeholder {
+    color: var(--text-muted);
 }
 
 #habitName:focus {
     outline: none;
-    border-color: #4CAF50;
-    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }
 
 #addBtn {
     padding: 14px 28px;
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--bg-button);
+    color: var(--text-light);
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -81,7 +195,7 @@ h1 i {
 }
 
 #addBtn:hover {
-    background-color: #45a049;
+    background-color: var(--bg-button-hover);
 }
 
 #addBtn i {
@@ -89,17 +203,16 @@ h1 i {
 }
 
 .progressBar {
-    background-color: white;
+    background-color: var(--bg-progress);
     padding: 18px;
     border-radius: 8px;
     margin-bottom: 25px;
     text-align: center;
-    border: 2px dashed #dee2e6;
-    background-color: #bec3e0;
+    border: 2px dashed var(--border-light);
 }
 
 #progressInfo {
-    color: #333;
+    color: var(--text-primary);
     font-weight: bold;
     font-size: 1.1rem;
     margin: 0;
@@ -116,8 +229,8 @@ ul {
 }
 
 li {
-    background-color: white;
-    border: 1px solid #e9ecef;
+    background-color: var(--bg-habit);
+    border: 1px solid var(--border-color);
     margin-bottom: 15px;
     padding: 20px;
     border-radius: 8px;
@@ -125,13 +238,12 @@ li {
     justify-content: space-between;
     align-items: center;
     transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    background-color: #bec3e0;
+    box-shadow: var(--shadow);
 }
 
 li:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-hover);
     border-color: #4CAF50;
 }
 
@@ -142,14 +254,14 @@ li:hover {
 .habit-name strong {
     display: block;
     font-size: 1.3rem;
-    color: #2c3e50;
+    color: var(--text-primary);
     margin-bottom: 8px;
     font-weight: 600;
 }
 
 .habit-name small {
     display: block;
-    color: #6c757d;
+    color: var(--text-muted);
     font-size: 0.9rem;
     margin-top: 4px;
     line-height: 1.4;
@@ -169,7 +281,7 @@ li:hover {
     font-size: 0.85rem;
     margin-left: 12px;
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .actions {
@@ -231,22 +343,22 @@ li:hover {
     font-weight: bold;
 }
 
-/* Khali pan ki tanhayi 🤧*/
 
+/* Khali-Pan ki tanhai 🤧 */
 .empty-state {
     text-align: center;
     padding: 60px 20px;
-    color: #6c757d;
+    color: var(--text-muted);
     font-style: italic;
-    border: 2px dashed #dee2e6;
+    border: 2px dashed var(--border-light);
     border-radius: 10px;
     margin-top: 20px;
-    background-color: #f8f9fa;
+    background-color: var(--bg-secondary);
 }
 
 .empty-state i {
     font-size: 4rem;
-    color: #dee2e6;
+    color: var(--border-light);
     margin-bottom: 20px;
     display: block;
 }
@@ -256,44 +368,81 @@ li:hover {
     margin: 0;
 }
 
-/* Media query dalna hai abhi toh */
+/* kUch naya sikhne mila  */
 
-/* Abhi mobile ke liye bana raha hu */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-hover);
+}
+
+.filters-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: var(--bg-filters);
+    border-radius: 12px;
+    border: 2px solid #8bc34a;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* media query add krn hai abhi toh .... */
+
 
 @media (max-width: 768px) {
     .container {
         padding: 20px;
         margin: 10px;
     }
-    
+
     h1 {
         font-size: 1.8rem;
     }
-    
+
+    .header-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .theme-btn {
+        align-self: flex-start;
+    }
+
     .input {
         flex-direction: column;
     }
-    
+
     #addBtn {
         width: 100%;
         justify-content: center;
     }
-    
+
     li {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .habit-name {
         width: 100%;
         margin-bottom: 15px;
     }
-    
+
     .actions {
         width: 100%;
         justify-content: flex-end;
     }
-    
+
     .streak-badge {
         margin-top: 5px;
         margin-left: 0;
@@ -301,54 +450,74 @@ li:hover {
     }
 }
 
-/* media query sirf phone k liye rakhunga */
-
 @media (max-width: 480px) {
     body {
         padding: 10px;
     }
-    
+
     .container {
         padding: 15px;
     }
-    
+
     .actions {
         flex-direction: column;
         width: 100%;
     }
-    
+
     .actions button {
         width: 100%;
         justify-content: center;
     }
 }
 
-@keyframes flow {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes themeSwitch {
+    0% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
-li {
-    animation: flow 0.3s ease-out;
+body {
+    animation: themeSwitch 0.5s ease;
 }
 
-/* Thankyou bhai sikhane k liye 🫂 , ye nhi pta tha*/
+/* chatpate features */
 
-::-webkit-scrollbar {
-    width: 8px;
+[data-theme="dark"] .progressBar {
+    border-color: #555;
 }
 
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
+[data-theme="dark"] .streak-badge {
+    background: linear-gradient(135deg, #FFD700, #FF8C00);
+    color: #222;
 }
 
-::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 4px;
+[data-theme="dark"] .empty-state {
+    background-color: #2a2a2a;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+
+[data-theme="dark"] .theme-btn i.fa-moon::before {
+    content: "\f185";
 }
 
-/* Kuch aur improvements baad me karunga jarurat padi toh */
+.theme-btn i.fa-moon::before {
+    content: "\f186";
+}
+
+/* Dark mode me border glow krna hai */
+
+[data-theme="dark"] .container {
+    box-shadow: 0 5px 20px rgba(0, 255, 0, 0.1);
+}
+
+* {
+    transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+}
